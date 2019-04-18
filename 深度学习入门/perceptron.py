@@ -1,4 +1,5 @@
 import numpy as np
+from activation_functions import step_function
 
 
 class Perceptron(object):
@@ -11,7 +12,7 @@ class Perceptron(object):
         return np.sum(self.w * self.x) + self.b
 
     def activation(self):
-        def step_function(x): return 1 if x > 0 else 0
+
         return step_function(self.input_signal())
 
     def AND(self):
