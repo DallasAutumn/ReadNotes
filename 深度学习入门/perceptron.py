@@ -18,7 +18,7 @@ class Perceptron(object):
 
     def NAND(self):
         self.w = np.array([-0.5, -0.5])
-        self.b = -0.7
+        self.b = 0.7
 
         return 1 if self.neuron_input() > 0 else 0
 
@@ -29,5 +29,18 @@ class Perceptron(object):
         return 1 if self.neuron_input() > 0 else 0
 
 
-p = Perceptron(1, 2)
-print([p.AND(), p.NAND(), p.OR()])
+class Multi_Layered_Perceptron(Perceptron):
+
+    def __init__(self, x1, x2):
+        super().__init__(x1, x2)
+
+    def XOR(self):
+        self.s1 = self.NAND()
+        self.s2 = self.OR()
+
+        return Perceptron(self.s1, self.s2).AND()
+
+
+for x1, x2 in [(0, 0), (1, 0), (0, 1), (1, 1)]:
+
+    print(x1, x2, Multi_Layered_Perceptron(x1, x2).XOR())
