@@ -7,26 +7,30 @@ class Perceptron(object):
         self.x1, self.x2 = x1, x2
         self.x = np.array([self.x1, self.x2])
 
-    def neuron_input(self):
+    def input_signal(self):
         return np.sum(self.w * self.x) + self.b
+
+    def activation(self):
+        def step_function(x): return 1 if x > 0 else 0
+        return step_function(self.input_signal())
 
     def AND(self):
         self.w = np.array([0.5, 0.5])
         self.b = -0.7
 
-        return 1 if self.neuron_input() > 0 else 0
+        return self.activation()
 
     def NAND(self):
         self.w = np.array([-0.5, -0.5])
         self.b = 0.7
 
-        return 1 if self.neuron_input() > 0 else 0
+        return self.activation()
 
     def OR(self):
         self.w = np.array([0.5, 0.5])
         self.b = -0.2
 
-        return 1 if self.neuron_input() > 0 else 0
+        return self.activation()
 
 
 class Multi_Layered_Perceptron(Perceptron):
